@@ -50,7 +50,7 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClientInstance}>
-      <Router>
+      <Router basename={import.meta.env.BASE_URL}>
         <ScrollToTop />
         <AuthenticatedApp />
       </Router>
