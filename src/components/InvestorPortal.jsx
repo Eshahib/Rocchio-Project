@@ -67,7 +67,7 @@ export default function InvestorPortal() {
     setSubmitError("");
     setSubmitting(true);
     try {
-      const response = await fetch("https://formsubmit.co/ajax/eshahib@hotmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/rocchiorealestatepartners@gmail.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
