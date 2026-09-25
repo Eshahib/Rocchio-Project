@@ -28,7 +28,7 @@ function AnimatedRoutes() {
           exit={{ opacity: 0, x: -24 }}
           transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Routes location={location}>
+          <Routes>
             {/* Add your page Route elements here */}
             <Route path="/" element={<Home />} />
             <Route path="/opportunities" element={<Home />} />
