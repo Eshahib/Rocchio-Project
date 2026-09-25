@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useInView } from "@/hooks/useInView";
 import { ArrowRight, Check } from "lucide-react";
-import IncomeSelect from "@/components/IncomeSelect";
 
 /**
  * The "Investor Portal" Gateway — two paths: "Access Deal Room" (existing) and
@@ -22,7 +21,6 @@ export default function InvestorPortal() {
     name: "",
     email: "",
     accredited: "",
-    income: "",
     interest: "",
     whyInterested: "",
   });
@@ -52,7 +50,7 @@ export default function InvestorPortal() {
   const reset = () => {
     setDone(false);
     setSubmitError("");
-    setForm({ name: "", email: "", accredited: "", income: "", interest: "", whyInterested: "" });
+    setForm({ name: "", email: "", accredited: "", interest: "", whyInterested: "" });
     updateParams({ path: null, step: null });
   };
 
@@ -226,7 +224,7 @@ function QualificationFlow({ step, form, set, next, back, submit, submitting, su
   const steps = ["Identity", "Accreditation", "Interests"];
   const canNext =
     (step === 0 && form.name && form.email) ||
-    (step === 1 && form.accredited && form.income) ||
+    (step === 1 && form.accredited) ||
     (step === 2 && form.interest && form.whyInterested);
 
   return (
@@ -260,20 +258,15 @@ function QualificationFlow({ step, form, set, next, back, submit, submitting, su
         )}
 
         {step === 1 && (
-          <>
-            <Field label="Are you an accredited investor?">
-              <div className="grid grid-cols-2 gap-3 mt-2">
-                {["Yes", "Not yet"].map((o) => (
-                  <button type="button" key={o} onClick={() => set("accredited", o)} className={`border py-3 min-h-[44px] font-mono text-xs uppercase tracking-[0.15em] transition-colors ${form.accredited === o ? "bg-foreground text-background border-foreground" : "hair-line hover:border-foreground"}`}>
-                    {o}
-                  </button>
-                ))}
-              </div>
-            </Field>
-            <Field label="Annual Income Range">
-              <IncomeSelect value={form.income} onChange={(v) => set("income", v)} />
-            </Field>
-          </>
+          <Field label="Are you an accredited investor?">
+            <div className="grid grid-cols-2 gap-3 mt-2">
+              {["Yes", "Not yet"].map((o) => (
+                <button type="button" key={o} onClick={() => set("accredited", o)} className={`border py-3 min-h-[44px] font-mono text-xs uppercase tracking-[0.15em] transition-colors ${form.accredited === o ? "bg-foreground text-background border-foreground" : "hair-line hover:border-foreground"}`}>
+                  {o}
+                </button>
+              ))}
+            </div>
+          </Field>
         )}
 
         {step === 2 && (
