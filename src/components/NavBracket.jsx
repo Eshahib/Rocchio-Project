@@ -2,17 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { X } from "lucide-react";
 import Logo from "@/components/Logo";
-import { useAuth } from "@/lib/AuthContext";
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogCancel,
-  AlertDialogAction,
-} from "@/components/ui/alert-dialog";
 
 const LINKS = [
   { label: "Opportunities", to: "/opportunities#opportunities" },
@@ -27,10 +16,6 @@ const LINKS = [
  */
 export default function NavBracket() {
   const [scrolled, setScrolled] = useState(false);
-  const { isAuthenticated, deleteAccount } = useAuth();
-  const [confirmOpen, setConfirmOpen] = useState(false);
-  const [deleting, setDeleting] = useState(false);
-  const [deleteError, setDeleteError] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const menuOpen =
@@ -56,20 +41,6 @@ export default function NavBracket() {
         `${location.pathname}${search ? `?${search}` : ""}${location.hash}`,
         { replace: true }
       );
-    }
-  };
-
-  const handleDelete = async (e) => {
-    e.preventDefault();
-    setDeleting(true);
-    setDeleteError(false);
-    try {
-      await deleteAccount();
-      setConfirmOpen(false);
-    } catch (err) {
-      setDeleteError(true);
-    } finally {
-      setDeleting(false);
     }
   };
 
@@ -157,44 +128,9 @@ export default function NavBracket() {
             <span>Accredited Investors Only</span>
             <span>SEC Registered</span>
             <span>Cody.Rocchio@yahoo.com</span>
-            {isAuthenticated && (
-              <button
-                onClick={() => setConfirmOpen(true)}
-                className="text-destructive hover:underline"
-              >
-                Delete Account
-              </button>
-            )}
           </div>
         </div>
       )}
-
-      <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Delete Account</AlertDialogTitle>
-            <AlertDialogDescription>
-              Permanently delete your account and end your session. This action
-              cannot be undone.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          {deleteError && (
-            <div className="text-sm text-destructive">
-              Could not delete your account. Please try again or contact support.
-            </div>
-          )}
-          <AlertDialogFooter>
-            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
-            <AlertDialogAction
-              className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
-              onClick={handleDelete}
-              disabled={deleting}
-            >
-              {deleting ? "Deleting…" : "Delete Account"}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
   );
 }

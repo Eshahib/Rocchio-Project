@@ -3,7 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { useInView } from "@/hooks/useInView";
 import { ArrowRight, Check } from "lucide-react";
 import IncomeSelect from "@/components/IncomeSelect";
-import { base44 } from "@/api/base44Client";
 
 /**
  * The "Investor Portal" Gateway — two paths: "Access Deal Room" (existing) and
@@ -68,10 +67,21 @@ export default function InvestorPortal() {
     setSubmitError("");
     setSubmitting(true);
     try {
-      await base44.functions.invoke("partner-inquiry", form);
+      const response = await fetch("https://formsubmit.co/ajax/eshahib@hotmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          ...form,
+          _subject: `New partner inquiry from ${form.name}`,
+        }),
+      });
+      if (!response.ok) throw new Error("Submission failed");
       setDone(true);
     } catch (error) {
-      setSubmitError(error.response?.data?.error || "We couldn't send your application. Please try again.");
+      setSubmitError("We couldn't send your application. Please try again.");
     } finally {
       setSubmitting(false);
     }

@@ -1,7 +1,7 @@
 import { Image } from "@/components/ui/image";
 
 const HERO_IMG =
-  "https://media.base44.com/images/public/6a94a284256ee594ccae6fbb/39a5287ee_tempImage37mGlP.jpg";
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200&q=85";
 
 /**
  * The "Scale & Stability" Hero — full-bleed landmark asset, headline split across the grid

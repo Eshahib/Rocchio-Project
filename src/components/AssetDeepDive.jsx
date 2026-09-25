@@ -3,7 +3,7 @@ import { Image } from "@/components/ui/image";
 import { useInView } from "@/hooks/useInView";
 
 const DETAIL_IMG =
-  "https://media.base44.com/images/public/6a94a284256ee594ccae6fbb/0ced4e203_IMG_4380.jpg";
+  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=85";
 
 /**
  * The "Asset Deep-Dive" — split-screen. Left: sticky gallery of architectural detail.

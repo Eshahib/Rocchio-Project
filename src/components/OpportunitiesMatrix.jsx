@@ -11,7 +11,7 @@ const DEALS = [
     irr: "16.8%",
     hold: "7-9 yrs",
     raise: "$5XX,000",
-    img: "https://media.base44.com/images/public/6a94a284256ee594ccae6fbb/177c61cca_tempImage7QppB7.jpg",
+    img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80",
   },
   {
     code: "RCH-102",
@@ -21,7 +21,7 @@ const DEALS = [
     irr: "15.9%",
     hold: "7-9 yrs",
     raise: "$6XX,000",
-    img: "https://media.base44.com/images/public/6a94a284256ee594ccae6fbb/869b7259e_IMG_4381.jpg",
+    img: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
   },
 ];
 
