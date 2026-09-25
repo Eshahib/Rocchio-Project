@@ -20,9 +20,21 @@ export default function ScrollToTop() {
 
     if (hash) {
       const id = getHashId(hash);
-      const timer = window.setTimeout(() => {
-        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-      }, 50);
+      let attempts = 0;
+      let timer;
+
+      const scrollToHash = () => {
+        const target = document.getElementById(id);
+        if (target) {
+          target.scrollIntoView({ behavior: "smooth" });
+          return;
+        }
+
+        attempts += 1;
+        if (attempts < 12) timer = window.setTimeout(scrollToHash, 50);
+      };
+
+      timer = window.setTimeout(scrollToHash, 50);
       return () => window.clearTimeout(timer);
     }
 
