@@ -44,6 +44,22 @@ export default function NavBracket() {
     }
   };
 
+  const jumpToSection = (event, link) => {
+    event.preventDefault();
+    const hash = link.split("#")[1];
+    closeMenu();
+
+    if (!hash) return;
+
+    navigate(`${location.pathname}${location.search}#${hash}`, { replace: true });
+    window.requestAnimationFrame(() => {
+      document.getElementById(hash)?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
+
   useEffect(() => {
     const onScroll = () =>
       setScrolled(window.scrollY > window.innerHeight * 0.6);
@@ -109,10 +125,7 @@ export default function NavBracket() {
               <a
                 key={l.to}
                 href={l.to}
-                onClick={(e) => {
-                  e.preventDefault();
-                  navigate(l.to, { replace: true });
-                }}
+                onClick={(e) => jumpToSection(e, l.to)}
                 className="group flex items-baseline gap-6 py-4 md:py-6 border-b hair-line"
               >
                 <span className="font-mono text-xs text-muted-foreground">
