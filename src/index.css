@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Stone & Steel palette */
+    --background: 42 17% 97%;          /* #F9F8F6 Warm Alabaster */
+    --foreground: 0 0% 10%;           /* #1A1A1A Carbon Black */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+    --popover: 42 17% 97%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 0 0% 10%;
+    --primary-foreground: 42 17% 97%;
+    --secondary: 40 8% 92%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 8% 92%;
+    --muted-foreground: 0 0% 35%;
+    --accent: 130 14% 33%;            /* #4A5D4E Deep Oxide Green */
+    --accent-foreground: 42 17% 97%;
+    --highlight: 46 56% 53%;         /* #D4AF37 Muted Brass */
+    --highlight-foreground: 0 0% 10%;
+    --destructive: 0 62% 40%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 40 8% 86%;
+    --input: 40 8% 86%;
+    --ring: 130 14% 33%;
+    --radius: 0.125rem;
+    --font-heading: 'Fraunces', ui-serif, Georgia, serif;
+    --font-body: 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Fraunces', ui-serif, Georgia, serif;
+    --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+}
+
+/* Native iOS / dark-mode: map the light palette to dark slate when the OS prefers dark. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 215 28% 12%;          /* #161d27 Graphite Slate */
+    --foreground: 40 17% 92%;           /* #ECE8E1 Alabaster */
+    --card: 215 28% 15%;
+    --card-foreground: 40 17% 92%;
+    --popover: 215 28% 14%;
+    --popover-foreground: 40 17% 92%;
+    --primary: 40 17% 92%;
+    --primary-foreground: 215 28% 12%;
+    --secondary: 215 25% 18%;
+    --secondary-foreground: 40 17% 92%;
+    --muted: 215 25% 18%;
+    --muted-foreground: 215 15% 65%;
+    --accent: 130 14% 38%;
+    --accent-foreground: 40 17% 92%;
+    --highlight: 46 56% 58%;
+    --highlight-foreground: 215 28% 12%;
+    --destructive: 0 50% 45%;
+    --destructive-foreground: 40 17% 92%;
+    --border: 215 20% 25%;
+    --input: 215 20% 25%;
+    --ring: 130 14% 40%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html, body { overscroll-behavior: none; }
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    font-feature-settings: "ss01", "cv01";
+  }
+  ::selection { background: #D4AF37; color: #1A1A1A; }
+  /* Disable text selection on interactive chrome / layout wrappers for a native-app feel. */
+  button,
+  nav,
+  header,
+  footer,
+  [role="dialog"],
+  [data-layout-wrapper] {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+@layer components {
+  .hair-line { border-color: rgba(26,26,26,0.12); }
+  .grid-axis {
+    background-image:
+      linear-gradient(to right, rgba(26,26,26,0.04) 1px, transparent 1px);
+    background-size: calc(100% / 12) 100%;
+  }
+  .ticker-track {
+    display: inline-flex;
+    white-space: nowrap;
+    animation: ticker-scroll 60s linear infinite;
+  }
+  .reveal-line {
+    position: relative;
+    overflow: hidden;
+  }
+  .reveal-line > * {
+    transform: translateY(110%);
+    animation: line-rise 1s cubic-bezier(0.16,1,0.3,1) forwards;
+  }
+
+  /* iOS safe-area insets for the fixed NavBracket corners. */
+  .nav-corner-tl {
+    top: calc(0.75rem + env(safe-area-inset-top));
+    left: 0.75rem;
+  }
+  .nav-corner-tr {
+    top: calc(1.25rem + env(safe-area-inset-top));
+    right: 1.25rem;
+  }
+  @media (min-width: 768px) {
+    .nav-corner-tl {
+      top: calc(1.25rem + env(safe-area-inset-top));
+      left: 1.25rem;
+    }
+    .nav-corner-tr {
+      top: calc(1.75rem + env(safe-area-inset-top));
+      right: 2rem;
+    }
+  }
+  .safe-pad-top { padding-top: env(safe-area-inset-top); }
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes line-rise {
+  to { transform: translateY(0); }
+}
+
+@keyframes assemble-up {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.assemble { opacity: 0; }
+.assemble.in-view {
+  animation: assemble-up 1.1s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+
+/* Globally hide WebKit scrollbars for a native-app feel. */
+::-webkit-scrollbar { display: none; }
