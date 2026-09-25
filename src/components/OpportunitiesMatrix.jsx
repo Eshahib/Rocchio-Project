@@ -1,6 +1,8 @@
 import { useRef } from "react";
 import { Image } from "@/components/ui/image";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import bristolImage from "@/components/ui/IMG_0724-preview.jpg";
+import campbellImage from "@/components/ui/IMG_4681.jpeg";
 
 const DEALS = [
   {
@@ -11,7 +13,7 @@ const DEALS = [
     irr: "16.8%",
     hold: "7-9 yrs",
     raise: "$5XX,000",
-    img: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80",
+    img: bristolImage,
   },
   {
     code: "RCH-102",
@@ -21,7 +23,7 @@ const DEALS = [
     irr: "15.9%",
     hold: "7-9 yrs",
     raise: "$6XX,000",
-    img: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1400&q=80",
+    img: campbellImage,
   },
 ];
 

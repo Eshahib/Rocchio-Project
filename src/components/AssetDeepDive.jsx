@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import { Image } from "@/components/ui/image";
 import { useInView } from "@/hooks/useInView";
+import bristolImage from "@/components/ui/IMG_0724-preview.jpg";
 
-const DETAIL_IMG =
-  "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=85";
+const DETAIL_IMG = bristolImage;
 
 /**
  * The "Asset Deep-Dive" — split-screen. Left: sticky gallery of architectural detail.
