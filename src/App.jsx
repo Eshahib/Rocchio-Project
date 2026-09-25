@@ -47,10 +47,13 @@ function AnimatedRoutes() {
 
 
 function App() {
+  const basename = window.location.pathname.startsWith("/Rocchio-Project")
+    ? "/Rocchio-Project"
+    : "/";
 
   return (
     <QueryClientProvider client={queryClientInstance}>
-      <Router basename={import.meta.env.BASE_URL}>
+      <Router basename={basename}>
         <ScrollToTop />
         <AuthenticatedApp />
       </Router>
